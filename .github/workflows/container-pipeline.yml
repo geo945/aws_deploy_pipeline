@@ -22,6 +22,15 @@ env:
 
 jobs:
   delivery:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+
     uses: ./.github/workflows/deliver-container-image.yml
 
   deploy-staging:
