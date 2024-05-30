@@ -39,5 +39,5 @@ jobs:
     - name: Generate Coverage Report
       uses: ArtiomTr/jest-coverage-report-action@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.TOKEN_GITHUB_SECRET }}
         test_script: npm test
