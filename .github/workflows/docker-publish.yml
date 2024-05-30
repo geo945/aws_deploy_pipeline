@@ -1,10 +1,5 @@
 name: Docker
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 on:
   schedule:
     - cron: '28 22 * * *'
@@ -27,8 +22,10 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   build:
+    needs: [integration]
 
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
