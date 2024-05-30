@@ -12,7 +12,12 @@ env:
 
 
 jobs:
+  integration:
+    uses: ./.github/workflows/build.yml
+
   build:
+    needs: [integration]
+
     runs-on: ubuntu-latest
 
     permissions:

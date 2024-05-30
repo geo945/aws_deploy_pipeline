@@ -21,24 +21,16 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  integration:
-    uses: ./.github/workflows/integrate-node-app.yml
-
   delivery:
-    needs: [integration]
     uses: ./.github/workflows/deliver-container-image.yml
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
 
   deploy-staging:
     needs: [delivery]
     uses: ./.github/workflows/deploy-aws-app-runner.yml
     with:
       environment: Staging
-#    permissions:
-#      packages: read
+    permissions:
+      packages: read
     secrets: inherit
 
   deploy-production:
@@ -46,6 +38,6 @@ jobs:
     uses: ./.github/workflows/deploy-aws-app-runner.yml
     with:
       environment: Production
-#    permissions:
-#      packages: read
+    permissions:
+      packages: read
     secrets: inherit
