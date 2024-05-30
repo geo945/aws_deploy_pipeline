@@ -1,0 +1,6 @@
+
+export const CAR_POST_STATUS =  {
+    PENDING: 'PENDING',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED'
+}
