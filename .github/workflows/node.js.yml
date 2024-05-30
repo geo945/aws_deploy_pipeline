@@ -1,8 +1,6 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request_target:
     branches: [ "master" ]
 
@@ -11,33 +9,29 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x, 21.x, 22.x]
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+          cache: 'npm'
 
-    - name: Install node packages
-      run: npm install
+      - name: Install node packages
+        run: npm install
 
-    - name: Clean Install
-      run: npm ci
+      - name: Clean Install
+        run: npm ci
 
-    - name: Build Project
-      run: npm run build --if-present
+      - name: Build Project
+        run: npm run build --if-present
 
-    - name: Run Tests
-      run: npm test
+      - name: Run Tests
+        run: npm test
 
-    - name: Generate Coverage Report
-      uses: ArtiomTr/jest-coverage-report-action@v2
-      with:
-        github_token: ${{ secrets.TOKEN_GITHUB_SECRET }}
-        test_script: npm test
+      - name: Generate Coverage Report
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB_SECRET }}
+          test_script: npm test
