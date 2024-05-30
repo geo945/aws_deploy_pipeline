@@ -7,11 +7,11 @@ name: Deploy To AWS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 env:
@@ -23,24 +23,24 @@ env:
 jobs:
   integration:
     uses: ./.github/workflows/integrate-node-app.yml
-    permissions:
-      contents: read
+#    permissions:
+#      contents: read
 
   delivery:
     needs: [integration]
     uses: ./.github/workflows/deliver-container-image.yml
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
+#    permissions:
+#      contents: read
+#      packages: write
+#      id-token: write
 
   deploy-staging:
     needs: [delivery]
     uses: ./.github/workflows/deploy-aws-app-runner.yml
     with:
       environment: Staging
-    permissions:
-      packages: read
+#    permissions:
+#      packages: read
     secrets: inherit
 
   deploy-production:
@@ -48,6 +48,6 @@ jobs:
     uses: ./.github/workflows/deploy-aws-app-runner.yml
     with:
       environment: Production
-    permissions:
-      packages: read
+#    permissions:
+#      packages: read
     secrets: inherit
