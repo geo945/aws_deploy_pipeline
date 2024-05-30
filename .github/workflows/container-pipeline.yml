@@ -22,8 +22,7 @@ env:
 
 jobs:
   delivery:
-    runs-on: ubuntu-latest
-
+    uses: ./.github/workflows/deliver-container-image.yml
     permissions:
       contents: read
       packages: write
@@ -31,7 +30,6 @@ jobs:
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
 
-    uses: ./.github/workflows/deliver-container-image.yml
 
   deploy-staging:
     needs: [delivery]
