@@ -21,7 +21,7 @@ app.use(cors());
 
 app.use('/car', carRoutes);
 app.get('/health', (req, res, next) => {
-    res.send('Application is up and running!');
+    res.send('Application is up and running');
 });
 
 
