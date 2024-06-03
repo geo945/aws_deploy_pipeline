@@ -46,7 +46,7 @@ jobs:
         id: push
         run: |
           docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
-          REPO_NAME=`echo "{{ github.event.repository.name }}" | awk '{print tolower($0)}'`
+          echo "{{ github.event.repository.name }}" | awk '{print tolower($0)}'
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${REPO_NAME}
           docker push ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${REPO_NAME}
 
