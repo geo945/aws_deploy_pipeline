@@ -55,8 +55,8 @@ jobs:
         if: ${{ inputs.environment }} == 'Staging'
         id: push
         run: |
-          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
-          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${REPO_NAME}
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:master
+          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:master ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${REPO_NAME}
           docker push ${{ secrets.AWS_ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${REPO_NAME}
 
       - name: Deploy production with aws CLI
